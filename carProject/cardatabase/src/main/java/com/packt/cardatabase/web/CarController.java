@@ -1,0 +1,26 @@
+package com.packt.cardatabase.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.packt.cardatabase.domain.Car;
+import com.packt.cardatabase.domain.CarRepository;
+
+
+//컨트롤러 클래스
+@RestController
+public class CarController {
+
+	@Autowired
+	private CarRepository repository;
+	
+	@RequestMapping("/cars")
+	public Iterable<Car> getCars(){
+		// getCars() 메서드는 모든 자동차 객체를 반환하며, 이는 Jackson 라이브러리에 의해 JSON 객체로 마샬링된다.
+		// 마샬링(marshalling) : 한 객체의 메모리에서 표현방식을 저장 또는 전송에 적합한 다른 데이터 형식으로 변환하는 과정이다. 
+		
+		return repository.findAll();
+	}
+	
+}

@@ -1,0 +1,10 @@
+package com.packt.cardatabase.domain;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Table(name = "`user`")
+@Entity
+public class User {
+	
+}

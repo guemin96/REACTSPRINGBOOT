@@ -1,0 +1,90 @@
+package com.packt.cardatabase.domain;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Owner {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long ownerid;
+	private String firstname,lastname;
+	
+	public Owner() {}
+	
+	public Owner(String firstname, String lastname) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
+
+	public long getOwnerid() {
+		return ownerid;
+	}
+
+	public void setOwnerid(long ownerid) {
+		this.ownerid = ownerid;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	
+	
+	// 소유자는 자동차 여러 대를 가질 수 있으므로 필드의 형식은 List<Car>이다.
+	// Cascade 특성은 삭제 또는 업데이트 시 연속 효과가 적용되는 방법
+	/*
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="owner")
+	private List<Car> cars;
+
+	public List<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
+	}
+	*/
+	
+	// 다대다 관계
+	@ManyToMany(cascade=CascadeType.PERSIST)
+	@JoinTable(name="car_owner",
+				joinColumns = {@JoinColumn(name="ownerid")},
+				inverseJoinColumns = {@JoinColumn(name="`id`")})
+	private Set<Car> cars = new HashSet<>();
+
+	public Set<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(Set<Car> cars) {
+		this.cars = cars;
+	}
+	
+	
+	
+}

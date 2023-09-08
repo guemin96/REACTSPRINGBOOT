@@ -1,0 +1,13 @@
+package com.packt.cardatabase.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.packt.cardatabase.domain.UserRepository;
+
+@Service
+public class UserDetailsServiceImpl {
+	
+	@Autowired
+	private UserRepository repository;
+}

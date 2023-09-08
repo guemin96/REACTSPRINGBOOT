@@ -1,0 +1,8 @@
+package com.packt.cardatabase;
+
+import org.springframework.web.filter.OncePerRequestFilter;
+
+@Component
+public class AuthenticationFilter extends OncePerRequestFilter{
+
+}

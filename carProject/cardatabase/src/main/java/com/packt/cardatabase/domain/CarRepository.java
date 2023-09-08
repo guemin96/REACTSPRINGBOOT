@@ -1,0 +1,50 @@
+package com.packt.cardatabase.domain;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+
+//쿼리는 접두사(예:findBy)로 시작해야 하고, 그 다음에는 쿼리를 이용할 엔티티 클래스 필드가 나와야 한다.
+@RepositoryRestResource //(path = "vehicles")	// 엔드포인트 경로가 localhost:8080/api/vehicles로 변경됨
+public interface CarRepository extends CrudRepository<Car, Long>{
+	
+	// 브랜드로 자동차를 검색하는 쿼리
+	List<Car> findByBrand(@Param("brand") String brand);
+	
+	// 색상으로 자동차를 검색하는 쿼리
+	List<Car> findByColor(@Param("color") String color);
+	
+	// 연도로 자동차를 검색하는 쿼리
+	List<Car> findByYear(int year);
+	
+	// 브랜드와 모델로 자동차를 검색
+	List<Car> findByBrandAndModel(String brand, String model);
+	
+	//브랜드나 색상으로 자동차를 검색
+	List<Car> findByBrandOrColor(String brand, String color);
+	
+	//브랜드로 자동차를 검색하고 연도로 정렬
+	List<Car> findByBrandOrderByYearAsc(String brand);
+	
+	// @Query 어노테이션을 이용하면 SQL 문으로 쿼리를 만들 수 있다.
+	//Query("select c from Car c where c.brand = ?1")
+	//List<Car> findByBrand(String brand);
+	
+	// @Query 어노테이션에는 like 같은 고급 식을 지정할 수 있다.
+	@Query("select c from Car c where c.brand like %?1")
+	List<Car> findByBrandEndsWith(String brand);
+	
+	
+}
+// By키워드 다음에 And 및 Or 키워드를 붙여 여러 필드를 지정할 수 있다.
+// CrudRepository를 확장하는 PagingAndSortingRepository도 있음 -> 페이지 매김과 정렬을 적용하고 엔티티를 검색하는 메서드를 제공한다.
+// PagingAndSorting 리포지터리는 두 개의 추가 메서드를 이용할 수 있음
+// Iterable<T> findAll(Sort sort) : 지정한 옵션으로 정렬된 모든 엔티티를 반환
+// Page<T> findAll(Pageable pageable) : 지정한 페이지 매김 옵션으로 모든 엔티티를 반환
+
+
+

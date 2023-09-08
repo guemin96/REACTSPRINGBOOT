@@ -1,0 +1,11 @@
+package com.packt.cardatabase.service;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class JwtService {
+	
+	static final long EXPIRATIONTIME = 86400000; // 1일을 밀리초로 계산한 값
+	static final String PREFIX = "Bearer";
+	
+}

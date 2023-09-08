@@ -1,0 +1,10 @@
+package com.packt.cardatabase.web;
+
+import org.springframework.web.bind.annotation.RestController;
+
+//컨트롤러 클래스
+@RestController
+public class CarController {
+
+	
+}

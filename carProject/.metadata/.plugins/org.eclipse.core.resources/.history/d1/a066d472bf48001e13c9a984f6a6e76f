@@ -1,0 +1,6 @@
+package com.packt.cardatabase.service;
+
+@Service
+public class UserDetailsServiceImpl {
+
+}

@@ -1,0 +1,28 @@
+package com.packt.cardatabase.domain;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+
+//쿼리는 접두사(예:findBy)로 시작해야 하고, 그 다음에는 쿼리를 이용할 엔티티 클래스 필드가 나와야 한다.
+public interface CarRepository extends CrudRepository<Car, Long>{
+	
+	// 브랜드로 자동차를 검색하는 쿼리
+	List<Car> findByBrand(String brand);
+	
+	// 색상으로 자동차를 검색하는 쿼리
+	List<Car> findByColor(String color);
+	
+	// 연도로 자동차를 검색하는 쿼리
+	List<Car> findByYear(int year);
+	
+	// 브랜드와 모델로 자동차를 검색
+	List<Car> findByBrandAndModel(String brand, String model);
+	
+	//브랜드나 색상으로 자동차를 검색
+	List<Car> findByBrandOrColor(String brand, String color);
+	
+	
+}
+// By키워드 다음에 And 및 Or 키워드를 붙여 여러 필드를 지정할 수 있다.

@@ -1,0 +1,8 @@
+package com.packt.cardatabase.domain;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Owner {
+
+}

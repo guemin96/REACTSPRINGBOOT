@@ -1,0 +1,6 @@
+package com.packt.cardatabase.domain;
+
+public class AccountCredentials {
+	private String username;
+	private String password;
+}
